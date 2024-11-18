@@ -28,6 +28,21 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<!-- propiedades para configurar con SonarCloud-->
+		<sonar.projectKey></sonar.projectKey>
+		<sonar.organization></sonar.organization>
+		<sonar.host.url></sonar.host.url>
+		<sonar.login></sonar.login>
+
+		<!-- propiedades apra configuracion de jacoco-->
+		<jacoco.version>0.8.7</jacoco.version>
+
+		<!--relacionar a SonarCloud con Jacoco-->
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.coverage.jacoco.xmlReportPaths></sonar.coverage.jacoco.xmlReportPaths>
+
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -70,6 +85,44 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco.version}</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+						<configuration>
+							<excludes>
+								<exclude>**/Constants.java</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/coverage-reports</outputDirectory>
+							<formats>
+								<format>XML</format>
+							</formats>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.9.1.2184</version>
+			</plugin>
+
 		</plugins>
 	</build>
 
