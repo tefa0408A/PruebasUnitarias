@@ -29,10 +29,10 @@
 	<properties>
 		<java.version>17</java.version>
 		<!-- propiedades para configurar con SonarCloud-->
-		<sonar.projectKey></sonar.projectKey>
-		<sonar.organization></sonar.organization>
-		<sonar.host.url></sonar.host.url>
-		<sonar.login></sonar.login>
+		<sonar.projectKey>tefa0408a_unit-testing</sonar.projectKey>
+		<sonar.organization>tefa0408a</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.login>${env.SONAR_TOKEN}</sonar.login>
 
 		<!-- propiedades apra configuracion de jacoco-->
 		<jacoco.version>0.8.7</jacoco.version>
@@ -40,7 +40,7 @@
 		<!--relacionar a SonarCloud con Jacoco-->
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-		<sonar.coverage.jacoco.xmlReportPaths></sonar.coverage.jacoco.xmlReportPaths>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/coverage-reports/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 
 
 	</properties>
